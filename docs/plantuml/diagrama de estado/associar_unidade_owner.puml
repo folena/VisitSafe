@@ -1,0 +1,9 @@
+@startuml
+[*] --> TelaAssociarUnidade : [role == OWNER]
+
+TelaAssociarUnidade --> ValidandoCodigo : Insere código
+ValidandoCodigo --> UnidadeAssociada : [owner.cnpj == unidade.cnpj || owner.cpf == unidade.cpf]
+ValidandoCodigo --> ErroAssociacao : [tipos diferentes ou código inválido]
+UnidadeAssociada --> [*]
+ErroAssociacao --> [*]
+@enduml

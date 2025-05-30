@@ -1,0 +1,272 @@
+@startuml
+'----------------------------------------------------------
+' Configurações visuais
+'----------------------------------------------------------
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+hide empty members
+left to right direction
+
+'----------------------------------------------------------
+' Enums
+'----------------------------------------------------------
+enum CondominiumTypeEnum {
+  BUSINESS
+  RESIDENTIAL
+}
+
+enum DocumentTypeEnum {
+  CPF
+  CNPJ
+}
+
+enum ReleaseStatusEnum {
+  PENDING_CHECKIN
+  AUTHORIZED
+  CHECKED_OUT
+  UNAUTHORIZED
+}
+
+enum ReleaseTypeEnum {
+  GUEST
+  FAMILY
+  SERVICEPROVIDER
+  DELIVERY
+  DRIVER
+}
+
+enum RoleEnum {
+  ADMIN
+  EMPLOYEE
+  OWNER
+}
+
+'----------------------------------------------------------
+' Documentos
+'----------------------------------------------------------
+interface Document {
+  +getFormatted() : String
+  +getRaw()       : String
+  +isValid()      : boolean
+}
+
+class CnpjDocument {
+  -raw : String
+  +CnpjDocument(raw: String)
+}
+
+class CpfDocument {
+  -raw : String
+  +CpfDocument(raw: String)
+}
+
+Document <|.. CnpjDocument
+Document <|.. CpfDocument
+
+'----------------------------------------------------------
+' Conta e apoio
+'----------------------------------------------------------
+class Account {
+  +id       : UUID
+  +email    : String
+  +password : String
+  +role     : RoleEnum
+  +isActive : boolean
+}
+
+class Address {
+  +street       : String
+  +neighborhood : String
+  +city         : String
+  +state        : String
+  +zipCode      : String
+  +complement   : String
+}
+
+class Vehicle {
+  +id    : UUID
+  +brand : String
+  +model : String
+  +color : String
+  +plate : String
+}
+
+'----------------------------------------------------------
+' Condomínios e Unidades
+'----------------------------------------------------------
+abstract class Condominium {
+  +id                : UUID
+  +name              : String
+  +cnpj              : String
+  +condominiumType   : CondominiumTypeEnum
+  +createdAt         : OffsetDateTime
+  +updatedAt         : OffsetDateTime
+  #Condominium(name: String, cnpj: String, type: CondominiumTypeEnum)
+  -onCreate()        : void
+  -onUpdate()        : void
+}
+
+class EnterpriseCondominium {
+  +EnterpriseCondominium(name: String, cnpj: String)
+}
+
+class ResidentialCondominium {
+  +ResidentialCondominium(name: String, cnpj: String)
+}
+
+Condominium <|-- EnterpriseCondominium
+Condominium <|-- ResidentialCondominium
+
+abstract class Unit {
+  +id    : UUID
+  +lot   : String
+  +block : String
+}
+
+class EnterpriseUnit {
+}
+
+class ResidentialUnit {
+}
+
+class UnitAssociationCode {
+  +id               : UUID
+  +code             : String
+  +createdAt        : OffsetDateTime
+  +updatedAt        : OffsetDateTime
+}
+
+Unit <|-- EnterpriseUnit
+Unit <|-- ResidentialUnit
+Unit "1" o-- "N" UnitAssociationCode : associationCodes
+Condominium "1" o-- "N" Unit : units
+Unit "N" --> "1" Condominium : condominium
+Unit o-- Address : address
+
+'----------------------------------------------------------
+' Usuários
+'----------------------------------------------------------
+abstract class User {
+  +id                : UUID
+  +name              : String
+  +rawDocumentNumber : String
+  +documentType      : DocumentTypeEnum
+  +createdAt         : OffsetDateTime
+  +updatedAt         : OffsetDateTime
+  -onCreate()        : void
+  -onUpdate()        : void
+}
+
+class AdminUser {
+}
+
+class EmployeeUser {
+}
+
+class EnterpriseOwnerUser {
+}
+
+class ResidentialOwnerUser {
+}
+
+User <|-- AdminUser
+User <|-- EmployeeUser
+User <|-- EnterpriseOwnerUser
+User <|-- ResidentialOwnerUser
+User "1" *-- "1" Account : account
+
+AdminUser "N" --> "1" Condominium : condominium
+EmployeeUser "N" --> "1" Condominium : condominium
+EnterpriseOwnerUser "1" o-- "N" EnterpriseUnit : units
+ResidentialOwnerUser "1" o-- "N" ResidentialUnit : units
+UnitAssociationCode "N" --> "0..1" User : usedBy
+UnitAssociationCode "N" --> "0..1" User : lastUpdatedByAdmin
+
+'----------------------------------------------------------
+' Visitantes
+'----------------------------------------------------------
+abstract class Visitor {
+  +id         : UUID
+  +name       : String
+  +document   : String
+  +phone      : String
+  +createdAt  : OffsetDateTime
+  +updatedAt  : OffsetDateTime
+  +onCreate() : void
+  +onUpdate() : void
+}
+
+class DeliveryVisitor {
+  +hasCriminalBackgroundCheck : boolean
+}
+
+class DriverVisitor {
+  +hasCriminalBackgroundCheck : boolean
+}
+
+class FamilyVisitor {
+}
+
+class GuestVisitor {
+}
+
+class ServiceProviderVisitor {
+  +hasCriminalBackgroundCheck : boolean
+}
+
+Visitor <|-- DeliveryVisitor
+Visitor <|-- DriverVisitor
+Visitor <|-- FamilyVisitor
+Visitor <|-- GuestVisitor
+Visitor <|-- ServiceProviderVisitor
+Visitor o-- Vehicle : vehicle
+
+'----------------------------------------------------------
+' Releases
+'----------------------------------------------------------
+abstract class Release {
+  +id          : UUID
+  +validFrom   : OffsetDateTime
+  +validUntil  : OffsetDateTime
+  +dailyStart  : OffsetDateTime
+  +dailyEnd    : OffsetDateTime
+  +status      : ReleaseStatusEnum
+  +checkinAt   : OffsetDateTime
+  +checkoutAt  : OffsetDateTime
+  +createdAt   : OffsetDateTime
+  +updatedAt   : OffsetDateTime
+  +onCreate()  : void
+  +onUpdate()  : void
+}
+
+class DeliveryRelease {
+}
+
+class DriverRelease {
+}
+
+class FamilyRelease {
+}
+
+class GuestRelease {
+}
+
+class ServiceProviderRelease {
+}
+
+Release <|-- DeliveryRelease
+Release <|-- DriverRelease
+Release <|-- FamilyRelease
+Release <|-- GuestRelease
+Release <|-- ServiceProviderRelease
+
+Release "N" --> "1" Unit : unit
+Release "N" --> "0..1" EmployeeUser : checkinBy
+Release "N" --> "0..1" EmployeeUser : checkoutBy
+
+DeliveryRelease       "N" --> "1" DeliveryVisitor : visitor
+DriverRelease         "N" --> "1" DriverVisitor : visitor
+FamilyRelease         "N" --> "1" FamilyVisitor : visitor
+GuestRelease          "N" --> "1" GuestVisitor : visitor
+ServiceProviderRelease "N" --> "1" ServiceProviderVisitor : visitor
+@enduml

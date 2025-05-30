@@ -1,0 +1,16 @@
+@startuml
+actor EMPLOYEE
+participant View
+participant ReleaseController
+participant ReleaseSummaryResponseDTO
+participant Release
+participant ReleaseStatusUpdateService
+participant ReleaseRepository
+database Database
+
+EMPLOYEE -> View : GET /releases/today/canceled
+View -> ReleaseController : GET /releases/today/canceled
+ReleaseController -> ReleaseStatusUpdateService : findAllTodayByCondominiumAndStatus(UNAUTHORIZED)
+ReleaseStatusUpdateService -> ReleaseRepository : findAllTodayByStatus(UNAUTHORIZED)
+ReleaseRepository -> Database : SELECT * FROM releases WHERE status = 'UNAUTHORIZED' AND date = today
+@enduml

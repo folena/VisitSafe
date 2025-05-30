@@ -1,0 +1,7 @@
+@startuml
+[*] --> TelaUnidadeAdmin : [role == ADMIN]
+
+TelaUnidadeAdmin --> GerandoCodigo : Clique em "Gerar Código"
+GerandoCodigo --> CodigoGerado : [unidade não associada]
+CodigoGerado --> [*]
+@enduml

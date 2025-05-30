@@ -1,0 +1,15 @@
+@startuml
+actor OWNER
+participant View
+participant ReleaseController
+participant ReleaseSummaryResponseDTO
+participant Release
+participant ReleaseReadService
+participant ReleaseRepository
+database Database
+
+OWNER -> View : GET /releases/my?propertyId=...&startDate=...&endDate=...
+View -> ReleaseController : GET /releases/my
+ReleaseController -> ReleaseRepository : findByOwnerAndPeriod()
+ReleaseRepository -> Database : SELECT * FROM releases WHERE ...
+@enduml

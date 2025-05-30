@@ -1,0 +1,1 @@
+{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"validFrom":{"type":"string","format":"date-time"},"validUntil":{"type":"string","format":"date-time"},"releaseType":{"type":"string","description":"Tipos de liberação","enum":["GUEST","FAMILY","SERVICEPROVIDER","DELIVERY","DRIVER"]}},"x-readme-ref-name":"ReleaseResponseDTO"}

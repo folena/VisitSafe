@@ -1,0 +1,7 @@
+@startuml
+[*] --> TelaLogin
+
+TelaLogin --> Autenticando : Preenche email/senha\nClica em login
+Autenticando --> [*] : Login válido
+Autenticando --> TelaLogin : Credenciais inválidas
+@enduml

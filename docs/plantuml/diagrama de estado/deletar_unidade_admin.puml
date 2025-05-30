@@ -1,0 +1,9 @@
+@startuml
+[*] --> TelaUnidadeAdmin : [role == ADMIN]
+
+TelaUnidadeAdmin --> TentandoDeletarUnidade
+TentandoDeletarUnidade --> UnidadeDeletada : [unidade não associada]
+TentandoDeletarUnidade --> FalhaDeletar : [unidade associada]
+UnidadeDeletada --> [*]
+FalhaDeletar --> [*]
+@enduml

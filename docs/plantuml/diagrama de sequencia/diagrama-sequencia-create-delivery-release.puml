@@ -1,0 +1,18 @@
+@startuml
+' Diagrama de Sequência - createDeliveryRelease
+actor OWNER
+participant View
+participant DeliveryReleaseController
+participant DeliveryReleaseCreateRequestDTO
+participant DeliveryReleaseCreateService
+participant DeliveryRelease
+participant DeliveryReleaseRepository
+database Database
+
+OWNER -> View : Envia dados do formulário (createDeliveryRelease)
+View -> DeliveryReleaseController : POST /releases/delivery
+DeliveryReleaseController -> DeliveryReleaseCreateService : create(dto)
+DeliveryReleaseCreateService -> DeliveryRelease : Cria entidade
+DeliveryReleaseCreateService -> DeliveryReleaseRepository : save(deliveryRelease)
+DeliveryReleaseRepository -> Database : INSERT INTO delivery_releases
+@enduml

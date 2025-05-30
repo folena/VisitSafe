@@ -1,0 +1,1 @@
+{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"brand":{"type":"string"},"model":{"type":"string"},"color":{"type":"string"},"plate":{"type":"string"}},"x-readme-ref-name":"Vehicle"}

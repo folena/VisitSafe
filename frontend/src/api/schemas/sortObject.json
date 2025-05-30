@@ -1,0 +1,1 @@
+{"type":"object","properties":{"direction":{"type":"string"},"nullHandling":{"type":"string"},"ascending":{"type":"boolean"},"property":{"type":"string"},"ignoreCase":{"type":"boolean"}},"x-readme-ref-name":"SortObject"}

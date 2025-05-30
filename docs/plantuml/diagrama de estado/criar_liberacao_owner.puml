@@ -1,0 +1,7 @@
+@startuml
+[*] --> TelaLiberacoes : [role == OWNER]
+
+TelaLiberacoes --> CriandoLiberacao : Seleciona unidade e preenche formulário
+CriandoLiberacao --> LiberacaoCriada : Liberação salva e exibida no calendário
+LiberacaoCriada --> [*]
+@enduml

@@ -1,0 +1,1 @@
+{"required":["cnpj","name"],"type":"object","properties":{"name":{"type":"string"},"cnpj":{"pattern":"\\d{14}","type":"string"}},"x-readme-ref-name":"ResidentialCondominiumCreateRequestDTO"}

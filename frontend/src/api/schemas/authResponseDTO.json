@@ -1,0 +1,1 @@
+{"type":"object","properties":{"token":{"type":"string"},"role":{"type":"string"},"email":{"type":"string"}},"x-readme-ref-name":"AuthResponseDTO"}

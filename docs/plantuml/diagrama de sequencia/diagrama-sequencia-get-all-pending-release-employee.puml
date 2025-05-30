@@ -1,0 +1,16 @@
+@startuml
+actor EMPLOYEE
+participant View
+participant ReleaseController
+participant ReleaseSummaryResponseDTO
+participant Release
+participant ReleaseStatusUpdateService
+participant ReleaseRepository
+database Database
+
+EMPLOYEE -> View : GET /releases/today/pending
+View -> ReleaseController : GET /releases/today/pending
+ReleaseController -> ReleaseStatusUpdateService : findAllTodayByCondominiumAndStatus(PENDING_CHECKIN)
+ReleaseStatusUpdateService -> ReleaseRepository : findAllTodayByStatus(PENDING_CHECKIN)
+ReleaseRepository -> Database : SELECT * FROM releases WHERE status = 'PENDING_CHECKIN' AND date = today
+@enduml
