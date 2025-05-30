@@ -1,14 +1,19 @@
+import { useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Separator } from '@radix-ui/react-separator'
 import { Phone, ArrowRight, Facebook, Instagram, Linkedin } from 'lucide-react'
-import Hotjar from '@hotjar/browser';
+import Hotjar from '@hotjar/browser'
 
 export default function ServicePage() {
-const siteId = 6419047;
-const hotjarVersion = 6;
+  useEffect(() => {
+    const siteId = 6419047
+    const hotjarVersion = 6
 
-Hotjar.init(siteId, hotjarVersion);
+    if (typeof window !== 'undefined') {
+      Hotjar.init(siteId, hotjarVersion)
+    }
+  }, [])
   return (
     <div className="flex flex-col min-h-screen scroll-smooth font-sans">
       <header className="fixed top-0 w-full h-[116px] bg-white shadow-md z-50">
