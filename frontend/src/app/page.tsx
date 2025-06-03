@@ -30,14 +30,14 @@ export default function ServicePage() {
             <div className="flex flex-col text-sm font-medium text-center">
               <a
                 href="#home"
-                className="flex-1 flex items-center justify-center w-full h-full hover:text-primary"
+                className="flex-1 flex items-center justify-center w-full h-full text-black hover:text-primary"
               >
                 Home
               </a>
               <div className="border-t w-full border-gray-300" />
               <a
                 href="#services"
-                className="flex-1 flex items-center justify-center w-full h-full hover:text-primary"
+                className="flex-1 flex items-center justify-center w-full h-full text-black hover:text-primary"
               >
                 Serviços
               </a>
@@ -47,14 +47,14 @@ export default function ServicePage() {
             <div className="flex flex-col text-sm font-medium text-center">
               <Link
                 href="/login"
-                className="flex-1 flex items-center justify-center w-full h-full hover:text-primary"
+                className="flex-1 flex items-center justify-center w-full h-full text-black hover:text-primary"
               >
                 Acessar Conta
               </Link>
               <div className="border-t w-full border-gray-300" />
               <Link
                 href="/register"
-                className="flex-1 flex items-center justify-center w-full h-full hover:text-primary"
+                className="flex-1 flex items-center justify-center w-full h-full text-black hover:text-primary"
               >
                 Criar Conta
               </Link>
@@ -144,10 +144,15 @@ export default function ServicePage() {
           </p>
 
           {/* Botão centralizado */}
-          <button className="mt-4 flex items-center justify-center mx-auto bg-white text-black w-[270px] h-[60px] rounded-md hover:bg-gray-100 transition">
+          <a
+            href="https://forms.gle/qhM7EHuEV1iMZT937"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 flex items-center justify-center mx-auto bg-white text-black w-[270px] h-[60px] rounded-md hover:bg-gray-100 transition"
+          >
             <span className="font-semibold mr-2">Contatar</span>
             <ArrowRight size={20} />
-          </button>
+          </a>
         </div>
 
         {/* Logo + redes sociais */}
@@ -158,7 +163,7 @@ export default function ServicePage() {
           </div>
 
           {/* Redes sociais */}
-          <div className="flex gap-6">
+          {/*<div className="flex gap-6">
             <a href="#" aria-label="Facebook" className="hover:text-gray-400 transition">
               <Facebook size={24} />
             </a>
@@ -168,7 +173,7 @@ export default function ServicePage() {
             <a href="#" aria-label="LinkedIn" className="hover:text-gray-400 transition">
               <Linkedin size={24} />
             </a>
-          </div>
+          </div>*/}
         </div>
 
         {/* Linha separadora + direitos */}
