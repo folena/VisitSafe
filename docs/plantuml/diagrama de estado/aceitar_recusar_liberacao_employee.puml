@@ -1,0 +1,10 @@
+@startuml
+[*] --> TelaLiberacoesFuncionario : [role == EMPLOYEE]
+
+TelaLiberacoesFuncionario --> AceitandoLiberacao : Clica em "Aceitar"
+TelaLiberacoesFuncionario --> RecusandoLiberacao : Clica em "Recusar"
+AceitandoLiberacao --> LiberacaoAutorizada
+RecusandoLiberacao --> LiberacaoRecusada
+LiberacaoAutorizada --> [*]
+LiberacaoRecusada --> [*]
+@enduml

@@ -1,0 +1,1 @@
+{"type":"object","properties":{"street":{"type":"string"},"neighborhood":{"type":"string"},"city":{"type":"string"},"state":{"type":"string"},"zipCode":{"type":"string"},"complement":{"type":"string"}},"x-readme-ref-name":"Address"}

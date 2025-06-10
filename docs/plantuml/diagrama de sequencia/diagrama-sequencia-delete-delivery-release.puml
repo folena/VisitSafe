@@ -1,0 +1,16 @@
+@startuml
+actor OWNER
+participant View
+participant DeliveryReleaseController
+participant DeliveryReleaseUpdateRequestDTO
+participant DeliveryReleaseUpdateService
+participant DeliveryRelease
+participant DeliveryReleaseRepository
+database Database
+
+OWNER -> View : Clica para excluir liberação
+View -> DeliveryReleaseController : DELETE /releases/delivery/{id}
+DeliveryReleaseController -> DeliveryReleaseUpdateService : delete(id)
+DeliveryReleaseUpdateService -> DeliveryReleaseRepository : deleteById(id)
+DeliveryReleaseRepository -> Database : DELETE FROM delivery_releases WHERE id = ?
+@enduml

@@ -1,36 +1,88 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+### Java / Spring Boot ###
+*.class
+*.jar
+*.war
+*.ear
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
+# Logs
+*.log
 
-# testing
-/coverage
+# Package output
+target/
 
-# next.js
-/.next/
-/out/
+# IDE files
+.idea/
+*.iml
 
-# production
-/build
+# VS Code settings
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
 
-# misc
+# OS/system files
 .DS_Store
-*.pem
+Thumbs.db
 
-# debug
+# Maven
+log/
+release/target/
+
+# Local environment and config
+.env
+*.pem
+*.p12
+*.jks
+
+# Lombok
+lombok.config
+
+# JVM crash logs
+hs_err_pid*
+replay_pid*
+
+### Node / Next.js ###
+node_modules/
+.next/
+out/
+dist/
+.build/
+
+# Testing
+coverage/
+.nyc_output/
+
+# Caches
+.cache/
+.parcel-cache/
+.pnpm-debug.log*
+.yarn-cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# Dependency locks
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build output
+*.tsbuildinfo
+
+# Runtime files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# local env files
-.env*.local
-.env
+# OS/system
+.DS_Store
 
-# vercel
-.vercel
+# Vercel
+.vercel/
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Optional tools
+.eslintcache
+.stylelintcache
+
+# Ignore release artifacts (optional — just don't add "release/" here!)
+# build/

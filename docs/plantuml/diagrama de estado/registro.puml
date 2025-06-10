@@ -1,0 +1,9 @@
+@startuml
+[*] --> TelaRegistro : Acessa /register
+
+TelaRegistro --> ProcessandoRegistro : Preenche formulário\n[com CPF ou CNPJ]
+ProcessandoRegistro --> ContaOwnerResidencial : [cpf]
+ProcessandoRegistro --> ContaOwnerEmpresarial : [cnpj]
+ContaOwnerResidencial --> [*]
+ContaOwnerEmpresarial --> [*]
+@enduml

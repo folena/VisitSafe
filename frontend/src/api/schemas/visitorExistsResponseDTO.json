@@ -1,0 +1,1 @@
+{"type":"object","properties":{"exists":{"type":"boolean","description":"Indica se o visitante existe ou nao","example":true}},"x-readme-ref-name":"VisitorExistsResponseDTO"}

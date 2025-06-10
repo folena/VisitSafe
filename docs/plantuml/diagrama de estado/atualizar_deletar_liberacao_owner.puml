@@ -1,0 +1,9 @@
+@startuml
+[*] --> TelaCalendarioLiberacoes : [role == OWNER]
+
+TelaCalendarioLiberacoes --> EditandoLiberacao : Seleciona liberação
+EditandoLiberacao --> LiberacaoAtualizada : Atualiza e salva
+EditandoLiberacao --> LiberacaoDeletada : Deleta
+LiberacaoAtualizada --> [*]
+LiberacaoDeletada --> [*]
+@enduml

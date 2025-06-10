@@ -1,0 +1,7 @@
+@startuml
+[*] --> TelaNovaUnidade : [role == ADMIN]
+
+TelaNovaUnidade --> CriandoUnidade : Preenche bloco/lote/endereço
+CriandoUnidade --> UnidadeCriada : Unidade salva
+UnidadeCriada --> [*]
+@enduml

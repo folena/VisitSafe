@@ -1,0 +1,1 @@
+{"type":"object","properties":{"hour":{"type":"integer","format":"int32"},"minute":{"type":"integer","format":"int32"},"second":{"type":"integer","format":"int32"},"nano":{"type":"integer","format":"int32"}},"description":"Horário de saída permitido por dia","x-readme-ref-name":"LocalTime"}

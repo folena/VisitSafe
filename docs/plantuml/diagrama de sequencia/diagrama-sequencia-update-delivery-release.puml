@@ -1,0 +1,19 @@
+@startuml
+actor OWNER
+participant View
+participant DeliveryReleaseController
+participant DeliveryReleaseUpdateRequestDTO
+participant DeliveryReleaseUpdateService
+participant DeliveryRelease
+participant DeliveryReleaseRepository
+database Database
+
+OWNER -> View : Envia dados do formulário (updateDeliveryRelease)
+View -> DeliveryReleaseController : PUT /releases/delivery/{id}
+DeliveryReleaseController -> DeliveryReleaseUpdateService : update(id, dto)
+DeliveryReleaseUpdateService -> DeliveryReleaseRepository : findById(id)
+DeliveryReleaseRepository -> Database : SELECT * FROM delivery_releases WHERE id = ?
+DeliveryReleaseUpdateService -> DeliveryRelease : Atualiza dados
+DeliveryReleaseUpdateService -> DeliveryReleaseRepository : save(deliveryRelease)
+DeliveryReleaseRepository -> Database : UPDATE delivery_releases SET ...
+@enduml
